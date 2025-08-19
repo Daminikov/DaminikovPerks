@@ -15,8 +15,8 @@ include(cmake/lib/autoCollectSources.cmake)
 # ---------------------------------------------------- #
 
 set(AUTHOR_NAME "Daminikov")
-set(PRODUCT_NAME "NAME")
-set(BEAUTIFUL_NAME "NAME")
+set(PRODUCT_NAME "DaminikovPerks")
+set(BEAUTIFUL_NAME "DaminikovPerks")
 
 add_project_folder(./)
 add_project_folder(./vendor/qtrlib/)

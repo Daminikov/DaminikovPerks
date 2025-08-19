@@ -1,0 +1,6 @@
+
+    //Вывести переменную в лог
+    auto number = 69;
+    auto output = std::format("Number is {}", number); 
+    logger::info("{}", output);
+
