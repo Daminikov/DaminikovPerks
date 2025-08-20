@@ -1,0 +1,11 @@
+		
+Namespace	    	Description				Key Components
+RE					Runtime Environment		Objects, Actors, UI, World
+RE::Actor			Character System		NPCs, Player Character, AI
+RE::TESForm			Object System			Items, Weapons, Quests, etc.
+RE::BGS*	 		Game Studio Systems		Game settings, world objects
+RE::BS*				Engine Systems			Rendering, animation, physics
+RE::NiAVObject		3D Scene Graph			Geometric rendering, scene management
+RE::UI				Interface System		Menus, HUD, controls
+RE::PlayerCamera	Camera System		    First/third person views, transitions
+
