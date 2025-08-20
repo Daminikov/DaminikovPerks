@@ -38,6 +38,19 @@
 Предоставление информации о местности (высота над уровнем моря, наличие воды и т. д.)
 Поддержка поиска пути и обнаружения столкновений
 
+
+!! Cell Flags and Properties 
+! TESObjectCELL
+Cells have various flags that determine their behavior and characteristics:
+
+- Flag	                                    Description
+!! kIsInteriorCell	                        Cell is an indoor space
+!! kHasWater	                            Cell contains water
+!! kCanTravelFromHere	                    Fast travel is allowed from this cell
+!! kPublicArea	                            Cell is a public area (not trespassing)
+!! kShowSky	                                Cell shows the sky
+!! kUseSkyLighting	                        Cell uses sky lighting instead of its own
+
 ! К TESсинглтону можно получить доступ с помощью TES::GetSingleton() и он предоставляет методы для перебора ячеек и ссылок, выполнения трассировки лучей и запроса информации о мире.
 
 !! TESDataHandler (управление данными)
@@ -87,7 +100,8 @@ TESObjectREFRпредставляет собой экземпляры форм, 
 Обработка сериализации игровых объектов
 Обеспечение целостности перекрестных ссылок
 
-
+!! Event System
+В среде выполнения Skyrim реализована сложная система событий, которая позволяет коду реагировать на игровые события. CommonLibSSE предоставляет доступ к этой системе через шаблонный класс BSTEvent и различные держатели источников событий.
 
 Параметры конфигурации сборки
 CommonLibSSE предоставляет несколько вариантов конфигурации сборки с помощью CMake:
