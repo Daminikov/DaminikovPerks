@@ -1,0 +1,113 @@
+
+! Game System Access    	
+-  Namespace	    	   Description				Key Components
+!! RE				       Runtime Environment		Objects, Actors, UI, World
+!! RE::Actor			   Character System		    NPCs, Player Character, AI
+!! RE::TESForm			   Object System			Items, Weapons, Quests, etc.
+!! RE::BGS*	 		       Game Studio Systems		Game settings, world objects
+!! RE::BS*				   Engine Systems			Rendering, animation, physics
+!! RE::NiAVObject		   3D Scene Graph			Geometric rendering, scene management
+!! RE::UI				   Interface System		    Menus, HUD, controls
+!! RE::PlayerCamera	       Camera System		    First/third person views, transitions
+
+! Key Singletons
+- Singleton	               Purpose	               Access Method
+!! TES	                   World management	       TES::GetSingleton()
+!! UI	                   User interface	       UI::GetSingleton()
+!! PlayerCharacter	       Player access	       PlayerCharacter::GetSingleton()
+!! TESDataHandler	       Form management	       TESDataHandler::GetSingleton()
+!! BSAudioManager	       Audio system	           BSAudioManager::GetSingleton()
+!! MenuControls	           Menu input	           MenuControls::GetSingleton()
+!! SkyrimVM	               Script virtual machine  SkyrimVM::GetSingleton()
+!! Calendar	               Game time	           Calendar::GetSingleton()
+!! BGSStoryTeller	       Quest management	       BGSStoryTeller::GetSingleton()
+
+
+Для систем искусственного интеллекта, контроллеров движения и обработки посылок существуют специализированные интерфейсы, такие как: 
+!! RE::ActorState, RE::MovementControllerNPC и RE::TESPackage.
+
+
+!! TES (World Management)
+Класс TES:: является центральным компонентом, отвечающим за управление миром. Он поддерживает игровой мир, включая ячейки, ссылки и игровые пространства.
+
+Основные обязанности включают в себя:
+
+Управление сеткой загруженных ячеек
+Обработка внутренних и наружных помещений
+Обработка ссылок на объекты внутри ячеек
+Предоставление информации о местности (высота над уровнем моря, наличие воды и т. д.)
+Поддержка поиска пути и обнаружения столкновений
+
+! К TESсинглтону можно получить доступ с помощью TES::GetSingleton() и он предоставляет методы для перебора ячеек и ссылок, выполнения трассировки лучей и запроса информации о мире.
+
+!! TESDataHandler (управление данными)
+Класс TESDataHandler управляет всеми игровыми данными, включая формы, плагины и файлы сохранения. Он служит центральным реестром для игровых объектов и отвечает за загрузку/сохранение данных.
+
+Основные обязанности включают в себя:
+
+Управление массивами форм по типу
+Загрузка файлов плагинов и управление ими
+Создание и регистрация игровых объектов
+Обработка идентификаторов форм и ссылок
+Поддержка операций поиска для форм и плагинов
+
+! К TESDataHandlerсинглтону можно получить доступ с помощью TESDataHandler::GetSingleton() и он предоставляет методы для поиска форм, управления файлами плагинов и создания игровых объектов.
+
+
+!! Система форм (базовые объекты и ссылки)
+Система форм состоит из TESForm (определений базовых объектов) и TESObjectREFR (экземпляров этих объектов в мире). Эта система служит основой для всех игровых объектов.
+
+!! TESForm
+TESFormявляется базовым классом для всех определений игровых объектов. Каждая форма имеет уникальный идентификатор и представляет собой тип объекта, который может существовать в игровом мире.
+
+Ключевые характеристики:
+
+Базовый класс для всех игровых объектов
+У каждой формы есть уникальный идентификатор FormID
+Формы упорядочены по типу (NPC, предмет, заклинание и т. д.).
+Формы содержат статические данные об объектах
+!! TESObjectREFR
+TESObjectREFRпредставляет собой экземпляры форм, размещённых в игровом мире. Каждая ссылка указывает на базовую форму и добавляет данные о положении, вращении и особенностях экземпляра.
+
+Ключевые характеристики:
+
+Представляет собой экземпляр формы в реальном мире
+Содержит информацию о положении, повороте и масштабе
+Управляет ExtraDataLists для данных, относящихся к конкретному экземпляру
+Для эффективного доступа можно использовать дескриптор
+
+
+!! Save/Load System
+Система сохранения/загрузки, управляемая в основном BGSSaveLoadManager, отвечает за сохранение игрового состояния, включая сохранение форм, ссылок и данных о мире.
+
+Ключевые обязанности:
+
+Сохранение и загрузка состояния игры
+Управление ссылками на формы при операциях сохранения/загрузки
+Обработка сериализации игровых объектов
+Обеспечение целостности перекрестных ссылок
+
+
+
+Параметры конфигурации сборки
+CommonLibSSE предоставляет несколько вариантов конфигурации сборки с помощью CMake:
+
+    Вариант	                Описание
+! REX_OPTION_INI	        Включает поддержку INI-конфигурации для REX
+! REX_OPTION_JSON	        Включает поддержку конфигурации JSON для REX
+! REX_OPTION_TOML	        Включает поддержку конфигурации TOML для REX
+! SKSE_SUPPORT_XBYAK	    Включает поддержку батута для Xbyak
+! SKYRIM_SUPPORT_AE	        Включает поддержку Skyrim Anniversary Edition
+
+
+
+Зависимости!
+CommonLibSSE зависит от нескольких внешних библиотек:
+
+Основные зависимости:
+! spdlog: Modern C++ logging library
+! binary_io: Binary I/O operations
+
+Завершение пользовательских зависимостей:
+! Address Library for SKSE Plugins
+! SKSE64 runtime component

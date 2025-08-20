@@ -13,14 +13,6 @@ SKSEPluginLoad(const SKSE::LoadInterface *skse) {
     SetupLog();
     logger::info("Plugin loaded");
 
-    auto formId = 0x123456;
-    auto text = "Sweet Roll";
-    auto number = 69;
-
-    logger::trace("The text is \" {}\"", text);
-    logger::info("The form ID is: {} and as hex {:x}", formId, formId);
-
-    auto output = std::format("Number is {}", number);
-    logger::info("{}", output);
+    RE::Actor::get
     return true;
 }
