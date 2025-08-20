@@ -13,8 +13,6 @@ void cast_spell(RE::Actor* victim, RE::Actor* attacker, RE::SpellItem* spell);
 void debug_notification(RE::BGSMessage* msg);
 void addSubscriber();
 
-
-
 class PerkResurrection : public ResurrectionAPI {
     bool should_resurrect(RE::Actor* a) const override 
     {
@@ -49,7 +47,6 @@ void OnMessage(MessagingInterface::Message* message) {
     
 
     if (message->type == MessagingInterface::kDataLoaded) {
-        info("DATA загрузилась");
     }
     
     if (message->type == MessagingInterface::kPostLoad) {
@@ -82,7 +79,6 @@ void cast_spell(RE::Actor* victim, RE::Actor* attacker, RE::SpellItem* spell) {
 }
 
 void debug_notification(RE::BGSMessage* msg) {
-    info("DEBUG OK!!!");
     RE::BSString a;
     msg->GetDescription(a, msg);
     RE::DebugNotification(a.c_str());
